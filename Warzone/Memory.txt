@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include "CommandProcessing.h"
+
+int main() {
+    // Testing the constructor
+    Command cmd1("initial command");
+    std::cout << "After constructor:\n" << cmd1 << std::endl;
+
+    // Testing saveEffect and getEffect
+    cmd1.saveEffect("initial effect");
+    std::cout << "After saveEffect:\nCommand: " << cmd1.getCommand() << ", Effect: " << cmd1.getEffect() << std::endl;
+
+    // Testing setCommand
+    cmd1.setCommand("updated command");
+    std::cout << "After setCommand:\n" << cmd1 << std::endl;
+
+    // Testing copy constructor
+    Command cmd2(cmd1);
+    std::cout << "After copy constructor (cmd2 from cmd1):\n" << cmd2 << std::endl;
+
+    // Modify cmd1 to check that cmd2 is a deep copy
+    cmd1.setCommand("modified command");
+    cmd1.saveEffect("modified effect");
+    std::cout << "After modifying cmd1:\ncmd1: " << cmd1 << "\ncmd2 (should be unchanged): " << cmd2 << std::endl;
+
+    // Testing assignment operator
+    Command cmd3("another command");
+    cmd3 = cmd1;
+    std::cout << "After assignment (cmd3 = cmd1):\n" << cmd3 << std::endl;
+
+    // Modify cmd1 again to verify that cmd3 is a deep copy
+    cmd1.setCommand("final command");
+    cmd1.saveEffect("final effect");
+    std::cout << "After modifying cmd1 again:\ncmd1: " << cmd1 << "\ncmd3 (should be unchanged): " << cmd3 << std::endl;
+
+    return 0;
+}
